@@ -1,9 +1,10 @@
 from flask.ext.wtf import Form
-from wtforms import StringField, BooleanField, PasswordField
-from wtforms.validators import DataRequired
+from wtforms import StringField, BooleanField, PasswordField, SubmitField
+from wtforms.validators import Required, Email, Length
 
 
 class LoginForm(Form):
-    username = StringField('Username:', validators=[DataRequired()])
-    password = PasswordField('Password:', validators=[DataRequired()])
-    remember_me = BooleanField('Remember me?', default=False)
+    username = StringField('Username', validators=[Required(), Length(1, 64)])
+    password = PasswordField('Password', validators=[Required()])
+    remember_me = BooleanField('Keep me logged in')
+    submit = SubmitField('Log In')
